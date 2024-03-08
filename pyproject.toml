@@ -1,0 +1,91 @@
+[tool.poetry]
+name = "fast-ui-never"
+version = "0.1.0"
+description = ""
+authors = ["Anton Zimin <zimkaa87@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pydantic-settings = "^2.2.0"
+fastui = "^0.5.2"
+uvicorn = "^0.27.1"
+fastapi = {extras = ["all"], version = "^0.109.2"}
+loguru = "^0.7.2"
+aiohttp = "^3.9.3"
+requests = "^2.31.0"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.2.1"
+mypy = "^1.8.0"
+pytest = "^8.0.1"
+pre-commit = "^3.6.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+[tool.pytest.ini_options]
+cache_dir = "/tmp/pytest_cache"
+addopts = "-vvv"
+testpaths = [
+    "tests",
+]
+
+[tool.ruff]
+line-length = 120
+fix = true
+unsafe-fixes = true
+select = ["ALL"]
+ignore = ["D1", "D203", "D213", "FA102", "ANN101", "S101"]
+exclude = [
+    "alembic",
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+cache-dir = "/tmp/ruff_cache"
+
+[tool.ruff.isort]
+no-lines-before = ["standard-library", "local-folder"]
+known-third-party = []
+known-local-folder = ["whole_app"]
+lines-after-imports = 2
+force-single-line = true
+
+[tool.ruff.extend-per-file-ignores]
+"tests/*.py" = ["ANN101", "S101", "S311"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.mypy]
+python_version = "3.12"
+cache_dir = "/tmp/mypy_cache"
+ignore_missing_imports = true
+strict = false
+install_types = true
+exclude = ["~/.pyenv/*", ".venv/", "alembic/"]

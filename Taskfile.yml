@@ -1,0 +1,39 @@
+version: "3"
+
+tasks:
+  default:
+    - task: help
+
+  help:
+    desc: "List all tasks"
+    silent: true
+    cmds:
+      - task --list-all
+
+  generate-pre-commit-config:
+    desc: "Generate .pre-commit-config.yaml file from .pre-commit-config.yaml.template"
+    silent: true
+    preconditions:
+      - test -f .pre-commit-config.yaml.template
+    generates:
+      - .pre-commit-config.yaml
+    env:
+      PRE_COMMIT_ADDITIONAL_DEPENDENCIES:
+        sh: echo "$(poetry export --with dev --without-hashes | while read line; do echo "          - $(echo ${line} | sed "s/^[[:space:]]*//")"; done)"
+    cmds:
+      - envsubst < .pre-commit-config.yaml.template > .pre-commit-config.yaml
+      - echo "The .pre-commit-config.yaml file has been generated."
+
+  update-pre-commit-config:
+    desc: "Update versions .pre-commit-config.yaml"
+    cmds:
+      - poetry update
+      - task generate-pre-commit-config
+      - pre-commit autoupdate
+
+  lint:
+    desc: "Run pre-commit run --all-files"
+    preconditions:
+      - test -f .pre-commit-config.yaml
+    cmds:
+      - pre-commit run --all-files
