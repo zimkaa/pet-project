@@ -58,7 +58,7 @@ def form_content(kind: FormKind) -> list[AnyComponent]:
     match kind:
         case "default":
             # return [
-            #     # c.ModelForm(model=LoginForm, display_mode="page", submit_url="/api/inventory/default"),  # noqa: ERA001
+            #     # c.ModelForm(model=LoginForm, display_mode="page", submit_url="/api/inventory/default"),  # noqa: ERA001, E501
             #     c.Markdown(text=text),  # noqa: ERA001
             # ]  # noqa: ERA001, RUF100
             return demo_page(
