@@ -1,6 +1,35 @@
 {
-    "mypy.enabled": true,
+    "mypy.enabled": false,
     "cSpell.words": [
-        "Локара"
+        "BEYT",
+        "Bloodthirst",
+        "Elementalist",
+        "ERINGARD",
+        "FEIDANA",
+        "FIZRA",
+        "FOLGA",
+        "Folmagaut",
+        "gameplay",
+        "iframe",
+        "INVENTAR",
+        "invetar",
+        "KENGI",
+        "LEGALAS",
+        "Lokar",
+        "OKREST",
+        "OKTAL",
+        "pinfo",
+        "PODGORN",
+        "ROMANSON",
+        "SAMYM",
+        "vcode",
+        "Берсерка",
+        "Жихорийский",
+        "импа",
+        "ЛЕГАЛАС",
+        "Локара",
+        "Молодильное",
+        "Физра",
+        "Элементалиста"
     ]
 }

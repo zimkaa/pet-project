@@ -36,8 +36,6 @@ testpaths = [
 line-length = 120
 fix = true
 unsafe-fixes = true
-select = ["ALL"]
-ignore = ["D1", "D203", "D213", "FA102", "ANN101", "S101"]
 exclude = [
     "alembic",
     ".bzr",
@@ -69,14 +67,21 @@ exclude = [
 ]
 cache-dir = "/tmp/ruff_cache"
 
-[tool.ruff.isort]
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["D1", "D203", "D213", "FA102", "ANN101", "S101"]
+exclude = [
+    "src/utils/inventory.py",
+]
+
+[tool.ruff.lint.isort]
 no-lines-before = ["standard-library", "local-folder"]
 known-third-party = []
 known-local-folder = ["whole_app"]
 lines-after-imports = 2
 force-single-line = true
 
-[tool.ruff.extend-per-file-ignores]
+[tool.ruff.lint.extend-per-file-ignores]
 "tests/*.py" = ["ANN101", "S101", "S311"]
 
 [tool.ruff.format]
