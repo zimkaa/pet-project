@@ -132,46 +132,46 @@ def where_i_am(html: str) -> Location:
         2 - инвентарь
         3 - природа ну или город
         """
-    # html = connect.get_html()  # noqa: ERA001
+    # html = connect.get_html()
 
     # # Just test!!!!  WORK!!!!
-    # person_info = get_info()  # noqa: ERA001
-    # parameters.update_params(person_info)  # noqa: ERA001
-    # parameter = parameters.parse()  # noqa: ERA001
-    # logger.success(f"{parameter=}")  # noqa: ERA001
+    # person_info = get_info()
+    # parameters.update_params(person_info)
+    # parameter = parameters.parse()
+    # logger.success(f"{parameter=}")
 
-    # connect.make_file(html, "first_check")  # noqa: ERA001
+    # connect.make_file(html, "first_check")
     if "var param_en" in html:
         logger.success("in fight")
-        # location = "fight"  # noqa: ERA001
+        # location = "fight"
         return Location.FIGHT
 
     if "DISABLED" not in html:
         logger.success("on nature")
-        # location = "nature"  # noqa: ERA001
+        # location = "nature"
         return Location.NATURE
 
     if '"Инвентарь" DISABLED>' in html:
         # # TODO: refactoring
         """ELIXIR have the same as invetar but not"""
         logger.success("in inventar")
-        # connect.make_file(html, "Not_inventar")  # noqa: ERA001
-        # location = "inventar"  # noqa: ERA001
+        # connect.make_file(html, "Not_inventar")
+        # location = "inventar"
         return Location.INVENTAR
 
-    # pattern = r"(?<=Инвентарь\" onclick=\"location=\'main\.php\?).+(?=\'\">)"  # in city  # noqa: ERA001
-    # pattern = r'(?<=&go=inv&vcode=).+(?=\'\" value=\"Инвентарь)'  # mb oktal  # noqa: ERA001
-    # pattern = FIND_IN_CITY  # noqa: ERA001
-    # prepare = re.findall(pattern, html)  # noqa: ERA001
+    # pattern = r"(?<=Инвентарь\" onclick=\"location=\'main\.php\?).+(?=\'\">)"  # in city
+    # pattern = r'(?<=&go=inv&vcode=).+(?=\'\" value=\"Инвентарь)'  # mb oktal
+    # pattern = FIND_IN_CITY
+    # prepare = re.findall(pattern, html)
     prepare = _find_pattern(FIND_IN_CITY, html)
     logger.debug(f"{prepare=}")
     if prepare:
         logger.success("in city")
         return Location.CITY
 
-    # pattern = r"(?<=&go=inv&vcode=).+(?=\'\" value=\"Инвентарь)"  # noqa: ERA001
-    # pattern = FIND_PAGE_INVENTAR  # noqa: ERA001
-    # prepare = re.findall(pattern, html)  # noqa: ERA001
+    # pattern = r"(?<=&go=inv&vcode=).+(?=\'\" value=\"Инвентарь)"
+    # pattern = FIND_PAGE_INVENTAR
+    # prepare = re.findall(pattern, html)
     prepare = _find_pattern(FIND_PAGE_INVENTAR, html)
     if not prepare:
         logger.success("in elixir")
@@ -182,12 +182,11 @@ def where_i_am(html: str) -> Location:
 
 
 def make_html_file(text: str, reason: str) -> None:
-    """Write data to file."""
     now = datetime.now(tz=UTC).strftime("%d-%m-%Y %H:%M:%S")
     dir_path = Path(__file__).parent.resolve()
     file_name = f"{now}_{reason}"
     file_path = Path(dir_path) / "files" / f"{file_name}.html"
-    # file_path = os.path.join(dir_path, "files", f"{file_name}.html")  # noqa: ERA001
+    # file_path = os.path.join(dir_path, "files", f"{file_name}.html")
 
     # with open(file_path, "w", encoding="cp1251") as file:
 
@@ -196,10 +195,10 @@ def make_html_file(text: str, reason: str) -> None:
 
 
 def make_file(text: str, reason: str) -> None:
-    # now = datetime.now().strftime("%d-%m-%Y %H:%M:%S")  # noqa: ERA001
-    # dir_path = Path(__file__).parent.resolve()  # noqa: ERA001
-    # file_name = f"{now}_{reason}_{settings.person.LOGIN}"  # noqa: ERA001
-    # file_path = os.path.join(dir_path, "files", f"{file_name}.txt")  # noqa: ERA001
+    # now = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+    # dir_path = Path(__file__).parent.resolve()
+    # file_name = f"{now}_{reason}_{settings.person.LOGIN}"
+    # file_path = os.path.join(dir_path, "files", f"{file_name}.txt")
 
     file_path = f"tests_files/{reason}.txt"
     with Path(file_path).open("w") as file:
@@ -245,12 +244,12 @@ async def get_inventory_client() -> str:
     connection = await connect()
 
     result = await switch_to_inventory(connection)
-    # make_html_file(result, "inventory")  # noqa: ERA001
+    # make_html_file(result, "inventory")
     elements = find_elements(result)
     result_part1 = get_dungeon_elements(elements, needed_elements)
 
     result2 = await go_to_elixir(connection)
-    # make_html_file(result2, "elixir")  # noqa: ERA001
+    # make_html_file(result2, "elixir")
     elements2 = find_elements(result2)
     result_part2 = get_dungeon_elements(elements2, needed_elements, result_part1)
     logger.success(f"{result_part2=}")
@@ -291,4 +290,4 @@ def update_settings(form: LoginForm) -> None:
     settings.connection.PROXY_PORT = login_form.proxy_port
     settings.connection.PROXY_LOG = login_form.proxy_log
     settings.connection.PROXY_PASS = login_form.proxy_pass
-    # print(f"{settings=}")  # noqa: ERA001
+    # print(f"{settings=}")
