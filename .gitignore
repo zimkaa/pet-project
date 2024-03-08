@@ -6,6 +6,7 @@ __pycache__/
 .mypy_cache/
 tests_files/
 src/scenarios/nl_request/cookies/
+src/scenarios/files/
 
 ## files
 *.pyc
