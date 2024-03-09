@@ -12,7 +12,6 @@ src/scenarios/files/
 *.pyc
 *.log
 *.log.zip
-.python-version
 .pre-commit-config.yaml
 items.pkl
 nl_cookies.txt
